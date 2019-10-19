@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>
+        JavaScript
+        | Exercises
+    </title>
+</head>
+
+<body style="text-align:center;" id="body">
+    <h1 style="color:green;">
+        Write a JavaScript program to display the current day and time in the following format
+    </h1>
+    <h3>
+        Sample Output : Today is : Tuesday<br />
+        Current time is : 10 PM : 30 : 38
+    </h3>
+    <p id="GFG_UP" style="font-size: 15px;  
+              font-weight: bold;">
+    </p>
+    <button onclick="refresh()">
+        Refresh
+    </button>
+    <p id="GFG_DOWN" style="color:green;  
+              font-size: 20px;  
+              font-weight: bold;">
+    </p>
+    <p>
+        Today is : <span id="today"></span>
+    </p>
+    <p>
+        Current time is : <strong id="currentTime"></strong>
+    </p>
+    <script>
+
+        refresh();
+
+        window.setInterval(function () {
+            refresh();
+        }, 1000);
+
+        function refresh() {
+            var el_up = document.getElementById("GFG_UP");
+            var el_down = document.getElementById("GFG_DOWN");
+            var todayHtml = document.getElementById("today");
+            var currentTimeHtml = document.getElementById("currentTime");
+
+
+
+            var today = new Date();
+
+            todayHtml.innerText = myDate(today);
+
+            currentTimeHtml.innerText = formatAMPM(today);
+
+            el_up.innerHTML = today;
+        }
+
+        function formatAMPM(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            var ampm = hours >= 12 ? 'pm' : 'am';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            var strTime = hours + ' ' + ampm.toUpperCase() + ' : ' + minutes + ' : ' + seconds;
+            return strTime;
+        }
+
+        function myDate(date) {
+            var weekdays = new Array(7);
+            weekdays[0] = "Sunday";
+            weekdays[1] = "Monday";
+            weekdays[2] = "Tuesday";
+            weekdays[3] = "Wednesday";
+            weekdays[4] = "Thursday";
+            weekdays[5] = "Friday";
+            weekdays[6] = "Saturday";
+            var r = weekdays[date.getDay()];
+
+            return r;
+        }
+    </script>
+</body>
+
+</html>
